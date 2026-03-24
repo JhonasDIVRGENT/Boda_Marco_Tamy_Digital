@@ -28,23 +28,21 @@ export const invitationConfig = {
   },
 
   hero: {
-    /** Sustituye por tu foto en /public/images/ */
-    imageSrc:
-      'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80',
+    /** Coloca tu imagen en public/images/ (ej. hero.jpg) y actualiza la ruta */
+    imageSrc: '/images/foto01.png',
     imageAlt: 'Marco y Tamara',
   },
 
   closing: {
-    imageSrc:
-      'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
+    imageSrc: '/images/foto02.png',
     imageAlt: 'Gracias por acompañarnos',
   },
 
   music: {
-    /** Audio de prueba (URL pública). Coloca tu MP3 en public/audio/ y pon src: '/audio/wedding-track.mp3' */
-    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    title: 'Melodía de prueba',
-    artist: 'SoundHelix',
+    /** MP3 en public/audio/ o URL absoluta pública */
+    src: '/audio/cancion.mp3',
+    title: 'Nuestra canción',
+    artist: 'Lista de reproducción',
     spotifyUrl: 'https://open.spotify.com/track/4PTG3Z6ohGkBX6BsjsCRca',
   },
 
