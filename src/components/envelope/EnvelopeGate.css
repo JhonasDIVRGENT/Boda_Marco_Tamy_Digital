@@ -1,0 +1,258 @@
+.envelope-root {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse 100% 70% at 50% 0%, #fce4ec 0%, transparent 50%),
+    linear-gradient(180deg, #fdfbf7 0%, #f3ebe3 100%);
+  overflow: hidden;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+
+.envelope-root.is-done {
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.envelope-ink-overlay {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+      circle at 30% 40%,
+      rgba(30, 42, 58, 0.2) 0%,
+      transparent 45%
+    ),
+    radial-gradient(circle at 70% 60%, rgba(44, 61, 82, 0.18) 0%, transparent 40%);
+  opacity: 0.65;
+  animation: inkDrift 14s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes inkDrift {
+  from {
+    transform: translate(-2%, 1%) scale(1);
+  }
+  to {
+    transform: translate(2%, -2%) scale(1.05);
+  }
+}
+
+.envelope-sakura {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.envelope-sakura--tl {
+  top: 4%;
+  left: -2%;
+  transform: rotate(-15deg);
+}
+
+.envelope-sakura--br {
+  bottom: 6%;
+  right: -4%;
+  transform: rotate(25deg) scaleX(-1);
+}
+
+.petal-float {
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: #f3a5b8;
+  border-radius: 60% 60% 50% 50%;
+  opacity: 0.55;
+  animation: petalFall linear infinite;
+}
+
+.petal-float:nth-child(1) {
+  left: 15%;
+  animation-duration: 9s;
+  animation-delay: 0s;
+}
+.petal-float:nth-child(2) {
+  left: 42%;
+  animation-duration: 12s;
+  animation-delay: 2s;
+  transform: scale(0.85);
+}
+.petal-float:nth-child(3) {
+  left: 78%;
+  animation-duration: 10s;
+  animation-delay: 4s;
+}
+
+@keyframes petalFall {
+  0% {
+    top: -5%;
+    transform: translateX(0) rotate(0deg);
+  }
+  100% {
+    top: 105%;
+    transform: translateX(24px) rotate(220deg);
+  }
+}
+
+.envelope-stage {
+  position: relative;
+  width: min(88vw, 340px);
+  perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.envelope-stage:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 6px;
+}
+
+.envelope-back {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.35 / 1;
+  background: linear-gradient(145deg, #f2e8dc 0%, #e8dfd2 40%, #dfd3c4 100%);
+  border-radius: 6px;
+  box-shadow: 0 22px 50px rgba(30, 42, 58, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+}
+
+.envelope-inner-card {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 14%;
+  top: 18%;
+  background: linear-gradient(180deg, #fffefb 0%, #faf6f0 100%);
+  border-radius: 4px;
+  border: 1px dashed rgba(197, 160, 89, 0.5);
+  transform-origin: 50% 100%;
+  transform: translateY(0);
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.envelope-stage.is-open .envelope-inner-card {
+  transform: translateY(-62%) scale(0.98);
+}
+
+.envelope-flap-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 52%;
+  background: linear-gradient(160deg, #ebe0d2 0%, #dccfbf 100%);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  transform-origin: 50% 0%;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+  border-top: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.envelope-stage.is-open .envelope-flap-bottom {
+  transform: rotateX(-178deg);
+}
+
+.envelope-flap-top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 52%;
+  background: linear-gradient(200deg, #e5d8c8 0%, #d8c9b6 100%);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  transform-origin: 50% 100%;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+  z-index: 3;
+  filter: drop-shadow(0 -4px 8px rgba(0, 0, 0, 0.06));
+}
+
+.envelope-stage.is-open .envelope-flap-top {
+  transform: rotateX(168deg);
+}
+
+.envelope-seal {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f0e0a8 0%, #c5a059 45%, #8a6b2d 100%);
+  border: 3px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 10px 24px rgba(138, 107, 45, 0.45);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fffef5;
+  letter-spacing: 0.06em;
+  transition:
+    transform 0.5s ease,
+    opacity 0.5s ease;
+}
+
+.envelope-stage.is-open .envelope-seal {
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+}
+
+.envelope-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2.6rem;
+  text-align: center;
+  font-family: var(--font-script);
+  font-size: 1.35rem;
+  color: var(--navy-wash);
+  opacity: 0.85;
+  transition: opacity 0.35s ease;
+}
+
+.envelope-stage.is-open .envelope-hint {
+  opacity: 0;
+}
+
+.envelope-ink-burst {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(30, 42, 58, 0.55) 0%, transparent 65%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: multiply;
+}
+
+.envelope-root.is-bursting .envelope-ink-burst {
+  animation: inkBurst 0.9s ease forwards;
+}
+
+@keyframes inkBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  40% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
