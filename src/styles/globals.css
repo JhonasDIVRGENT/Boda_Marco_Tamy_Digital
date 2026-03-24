@@ -150,6 +150,10 @@ a {
   transform: translateY(0);
 }
 
+a.btn-gold {
+  text-decoration: none;
+}
+
 .btn-gold svg {
   width: 1.1rem;
   height: 1.1rem;
