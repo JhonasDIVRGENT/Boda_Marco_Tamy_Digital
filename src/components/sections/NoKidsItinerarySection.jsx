@@ -1,8 +1,28 @@
 import invitationConfig from '../../content/invitationConfig'
 import ScrollReveal from '../ScrollReveal'
 import { SectionScene } from '../SceneDecoration'
-import { ItineraryIcon } from '../itineraryIcons'
+import {
+  Camera,
+  Church,
+  GlassWater,
+  HandHeart,
+  HeartHandshake,
+  Music,
+  PartyPopper,
+  Users,
+} from 'lucide-react'
 import './invitation.css'
+
+const itineraryIconMap = {
+  arch: Church,
+  hands: HandHeart,
+  heart: HeartHandshake,
+  glasses: GlassWater,
+  dance: PartyPopper,
+  camera: Camera,
+  group: Users,
+  dj: Music,
+}
 
 export default function NoKidsItinerarySection() {
   const nk = invitationConfig.noKids
@@ -37,8 +57,10 @@ export default function NoKidsItinerarySection() {
             </div>
 
             <div className="timeline-list">
-              {it.events.map((e) => (
-                <div key={`${e.time}-${e.label}`} className="timeline-grid">
+              {it.events.map((e) => {
+                const Icon = itineraryIconMap[e.icon] || HeartHandshake
+                return (
+                  <div key={`${e.time}-${e.label}`} className="timeline-grid">
                   <div className="timeline-slot timeline-slot--left">
                     {e.side === 'left' ? (
                       <>
@@ -48,7 +70,7 @@ export default function NoKidsItinerarySection() {
                     ) : null}
                   </div>
                   <div className="timeline-icon-cell">
-                    <ItineraryIcon name={e.icon} />
+                    <Icon size={16} strokeWidth={1.9} />
                   </div>
                   <div className="timeline-slot timeline-slot--right">
                     {e.side === 'right' ? (
@@ -59,7 +81,8 @@ export default function NoKidsItinerarySection() {
                     ) : null}
                   </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </ScrollReveal>

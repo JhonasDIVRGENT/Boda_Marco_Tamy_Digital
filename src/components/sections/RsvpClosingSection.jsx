@@ -2,23 +2,11 @@ import invitationConfig from '../../content/invitationConfig'
 import ScrollReveal from '../ScrollReveal'
 import { SectionScene } from '../SceneDecoration'
 import Countdown from '../Countdown'
-
-function TicketIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M4 8h16v8H4V8zm3 0v8M9 8v2M15 8v2"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}
+import { Ticket } from 'lucide-react'
 
 export default function RsvpClosingSection() {
   const r = invitationConfig.rsvp
-  const m = invitationConfig.monogram
+  const { logoTm } = invitationConfig.assets
 
   return (
     <section className="page-section section-bg-cream">
@@ -30,7 +18,7 @@ export default function RsvpClosingSection() {
             </h2>
             <div style={{ textAlign: 'center' }}>
               <a className="btn-gold" href={r.formUrl} target="_blank" rel="noreferrer">
-                <TicketIcon />
+                <Ticket size={18} strokeWidth={1.8} />
                 {r.buttonLabel}
               </a>
             </div>
@@ -40,12 +28,15 @@ export default function RsvpClosingSection() {
 
             <Countdown />
 
-            <div className="monogram-footer text-gold-gradient">
-              <div className="mono-inner">
-                {m.line1}
-                {m.amp}
-                {m.line2}
-              </div>
+            <div className="rsvp-logo-wrap">
+              <img
+                src={logoTm}
+                alt="T&M"
+                className="rsvp-logo"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                }}
+              />
             </div>
 
             <p

@@ -42,8 +42,8 @@ export const invitationConfig = {
     /** MP3 en public/audio/ o URL absoluta pública */
     src: '/audio/cancion.mp3',
     title: 'Nuestra canción',
-    artist: 'Lista de reproducción',
-    spotifyUrl: 'https://open.spotify.com/track/4PTG3Z6ohGkBX6BsjsCRca',
+    artist: '',
+    spotifyUrl: '',
   },
 
   nosCasamos: {
@@ -61,13 +61,13 @@ export const invitationConfig = {
     /**
      * Sustituye por el enlace exacto de Google Maps del lugar.
      */
-    mapsUrl:
-      'https://www.google.com/maps/search/?api=1&query=Characato+Asovich%2C+Arequipa',
+    mapsUrl: 'https://maps.app.goo.gl/gphYBnSU8pbeyVqe6',
   },
 
   dressCode: {
     title: 'Código de vestimenta',
     subtitle: 'Formal',
+    formalImageSrc: '/images/vestimenta_formal.png',
     bullets: [
       'Damas: Vestido elegante, no blanco ni colores muy claros.',
       'Caballeros: Traje formal.',
@@ -137,12 +137,30 @@ export const invitationConfig = {
     /**
      * Sustituye por tu Google Form / Typeform / etc.
      */
-    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSfexample/viewform',
+    formUrl:
+      'https://docs.google.com/forms/d/e/1FAIpQLSfdHb8R2pW0a02gNGz0q0zSqOJwnFcU1I7apZYOZwmlpcmNow/viewform',
   },
 
   envelope: {
     hint: 'Toca para abrir',
     sealInitials: 'M · T',
+    /** Una sola imagen del sobre cerrado (incluye sello si ya viene en el arte) */
+    closedImageSrc: '/images/sobre.png',
+    /** Vacío: la apertura es animación + transición a la invitación */
+    openedImageSrc: '',
+    /** true = no dibuja sello encima (usa sello del PNG) */
+    hideOverlaySeal: true,
+  },
+
+  assets: {
+    logoTm: '/images/logo_tm.png',
+    sakuraLeft: '/images/sakura_iz.png',
+    sakuraRight: '/images/sakura_der.png',
+    sakuraCluster: '/images/sakura_cayendo.png',
+    sakuraPetal: '/images/sakura_sola.png',
+    cloudVertical: '/images/nube_vertical_azul.png',
+    cloudHorizontal: '/images/nube_horizontal_azul.png',
+    cloudPink: '/images/nube_rosa.png',
   },
 }
 

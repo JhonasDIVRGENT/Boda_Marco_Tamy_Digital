@@ -1,120 +1,62 @@
 .hero-section {
   position: relative;
-  padding: 2.5rem 1.25rem 3.5rem;
-  background: #fff;
-  min-height: 100vh;
+  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.hero-photo-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(15, 18, 30, 0.06) 0%, rgba(15, 18, 30, 0.32) 65%, rgba(15, 18, 30, 0.58) 100%),
+    radial-gradient(ellipse at 50% 25%, rgba(255, 255, 255, 0.06) 0%, transparent 55%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.hero-ink-wash {
-  position: absolute;
-  left: 50%;
-  top: 42%;
-  transform: translate(-50%, -50%);
-  width: min(92vw, 380px);
-  height: min(92vw, 420px);
-  background: radial-gradient(
-    ellipse at 50% 45%,
-    rgba(30, 42, 58, 0.55) 0%,
-    rgba(44, 61, 82, 0.35) 45%,
-    transparent 72%
-  );
-  border-radius: 55% 45% 48% 52% / 52% 48% 55% 45%;
-  filter: blur(1px);
-  opacity: 0.85;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero-ink-wash::after {
-  content: '';
-  position: absolute;
-  inset: 8%;
-  border-radius: inherit;
-  background-image: radial-gradient(
-    circle,
-    rgba(212, 175, 55, 0.22) 1.5px,
-    transparent 1.5px
-  );
-  background-size: 14px 14px;
-  opacity: 0.45;
-}
-
-.hero-photo-wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 320px;
-  margin: 0 auto;
-  clip-path: inset(0 0 0 0 round 4px);
-  animation: heroInkClip 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
-  box-shadow: 0 20px 50px rgba(30, 42, 58, 0.2);
-}
-
-.hero-photo-wrap img {
-  width: 100%;
-  object-fit: cover;
-  aspect-ratio: 3 / 4;
-}
-
-@keyframes heroInkClip {
-  from {
-    clip-path: inset(12% 18% 18% 18% round 40% 40% 40% 40%);
-    filter: blur(10px);
-    opacity: 0;
-  }
-  to {
-    clip-path: inset(0 0 0 0 round 4px);
-    filter: blur(0);
-    opacity: 1;
-  }
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.25rem;
+  padding-top: min(14vh, 120px);
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
 }
 
 .hero-names {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
   text-align: center;
-  margin-top: 1.5rem;
-  animation: fadeRise 1s ease 0.5s both;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: min(94%, 22rem);
+  animation: fadeRiseOpacity 1s ease 0.4s both;
+  width: min(95%, 32rem);
 }
 
-.hero-names .flourish-row {
-  max-width: 20rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-monogram-wrap {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  margin-top: 1.25rem;
-  animation: fadeRise 1s ease 0.75s both;
-}
-
-.hero-monogram-wrap .mono-letters {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: clamp(2.5rem, 10vw, 3.4rem);
-  line-height: 0.85;
-  letter-spacing: -0.03em;
-}
-
-.hero-monogram-wrap .mono-amp-sm {
-  font-size: 1.15rem;
-  display: block;
-  margin-top: 0.1rem;
-}
-
-@keyframes fadeRise {
+@keyframes fadeRiseOpacity {
   from {
     opacity: 0;
-    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -174,6 +116,65 @@
 .sakura-hero-lr--r {
   right: 2%;
   transform: rotate(18deg) scaleX(-1);
+}
+
+.hero-logo-wrap {
+  width: min(45vw, 180px);
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  animation: fadeRiseOpacity 1s ease 0.6s both;
+}
+
+.hero-logo {
+  width: 100%;
+  height: auto;
+  max-height: 155px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
+}
+
+.hero-player-wrap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(0.6rem, env(safe-area-inset-bottom, 0px));
+  width: min(95%, 420px);
+  margin: 0 auto;
+  animation: fadeRiseOpacity 1s ease 0.8s both;
+}
+
+.hero-player-wrap .music-player {
+  margin-top: 0;
+  max-width: 100%;
+}
+
+/* Ramas solo en esquinas superiores (no sobre los hombros ni el texto) */
+.hero-sakura-corner {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  width: min(34vw, 132px);
+  height: auto;
+  max-height: min(24vh, 200px);
+  object-fit: contain;
+  object-position: top center;
+  pointer-events: none;
+  opacity: 0.88;
+}
+
+.hero-sakura-corner--tl {
+  left: 0;
+  transform: translate(-4%, -2%);
+}
+
+.hero-sakura-corner--tr {
+  right: 0;
+  transform: translate(4%, -2%) scaleX(-1);
 }
 
 /* Timeline list */
@@ -255,4 +256,83 @@
   grid-column: 1 / span 3;
   min-height: 0;
   padding: 0;
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: 100svh;
+    height: 100svh;
+  }
+
+  .hero-content {
+    padding: min(12vh, 100px) 0.75rem 0.85rem;
+    justify-content: flex-end;
+  }
+
+  .hero-names {
+    width: 100%;
+    bottom: 25%;
+  }
+
+  .hero-names .heading-script {
+    font-size: clamp(2rem, 9.5vw, 2.55rem);
+  }
+
+  .hero-logo-wrap {
+    width: min(52vw, 165px);
+    bottom: 14%;
+  }
+
+  .hero-player-wrap {
+    width: 100%;
+    bottom: max(0.45rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  .hero-sakura-corner {
+    width: min(28vw, 108px);
+    max-height: min(20vh, 160px);
+    opacity: 0.82;
+  }
+
+  .nos-date-banner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.35rem;
+    margin: 1.2rem 0 0.85rem;
+  }
+
+  .nos-date-side {
+    padding-top: 0;
+    text-align: center !important;
+    font-size: 0.72rem;
+  }
+
+  .nos-month-year {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .timeline-list::before {
+    left: 16px;
+    transform: none;
+  }
+
+  .timeline-grid {
+    grid-template-columns: 32px 1fr;
+    gap: 0.25rem 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .timeline-icon-cell {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .timeline-slot--left,
+  .timeline-slot--right {
+    grid-column: 2;
+    text-align: left;
+    padding: 0;
+    min-height: 2.2rem;
+  }
 }

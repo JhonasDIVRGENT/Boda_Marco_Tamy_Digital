@@ -1,20 +1,7 @@
 import invitationConfig from '../../content/invitationConfig'
 import ScrollReveal from '../ScrollReveal'
 import { SectionScene } from '../SceneDecoration'
-
-function MapIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M9 6l-6 3v12l6-3 6 3 6-3V3l-6 3-6-3v12"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="11" r="2" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  )
-}
+import { MapPinned } from 'lucide-react'
 
 export default function NosCasamosSection() {
   const c = invitationConfig.nosCasamos
@@ -59,7 +46,7 @@ export default function NosCasamosSection() {
 
             <div style={{ textAlign: 'center', marginTop: '1.75rem' }}>
               <button type="button" className="btn-gold" onClick={() => window.open(c.mapsUrl, '_blank')}>
-                <MapIcon />
+                <MapPinned size={18} strokeWidth={1.8} />
                 {c.mapButtonLabel}
               </button>
             </div>

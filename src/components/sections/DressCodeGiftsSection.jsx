@@ -1,26 +1,20 @@
 import invitationConfig from '../../content/invitationConfig'
 import ScrollReveal from '../ScrollReveal'
 import { SectionScene } from '../SceneDecoration'
-
-function BillIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.6" />
-      <path d="M8 10h8M8 14h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  )
-}
+import { WalletCards } from 'lucide-react'
 
 function SuitDressSilhouettes() {
+  const imageSrc = invitationConfig.dressCode.formalImageSrc
   return (
     <div className="dress-visual" aria-hidden>
-      <svg viewBox="0 0 60 80" fill="#1a1a1a">
-        <circle cx="30" cy="6" r="5" />
-        <path d="M30 12 L38 16 L42 26 L48 30 L46 72 L14 72 L12 30 L18 26 L22 16 Z" />
-      </svg>
-      <svg viewBox="0 0 60 80" fill="#1a1a1a">
-        <path d="M30 6 C34 6 38 9 38 14 L36 26 L42 32 L40 74 L20 74 L18 32 L24 26 L22 14 C22 9 26 6 30 6Z" />
-      </svg>
+      <img
+        className="dress-visual-image"
+        src={imageSrc}
+        alt=""
+        onError={(e) => {
+          e.currentTarget.style.display = 'none'
+        }}
+      />
     </div>
   )
 }
@@ -79,7 +73,7 @@ export default function DressCodeGiftsSection({ onOpenBank }) {
               <div className="gift-col">
                 <p className="script-label">{g.bankLabel}</p>
                 <button type="button" className="btn-gold" style={{ marginTop: '0.75rem' }} onClick={onOpenBank}>
-                  <BillIcon />
+                  <WalletCards size={18} strokeWidth={1.8} />
                   {g.bankButtonLabel}
                 </button>
               </div>

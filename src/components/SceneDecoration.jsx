@@ -1,44 +1,61 @@
 import './scene-decoration.css'
+import invitationConfig from '../content/invitationConfig'
 
-export function InkCorner({ position = 'tr' }) {
-  return <div className={`scene-ink scene-ink--${position}`} aria-hidden />
-}
-
-export function SakuraCorner({ position = 'tr' }) {
+function DecorationImage({ src, className }) {
+  if (!src) return null
   return (
-    <svg
-      className={`scene-sakura scene-sakura--${position}`}
-      viewBox="0 0 180 180"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <img
+      src={src}
+      className={className}
+      alt=""
       aria-hidden
-    >
-      <path
-        d="M20 160 Q60 100 90 60 Q120 30 170 20"
-        stroke="#4a3528"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <circle cx="100" cy="55" r="8" fill="#f3a5b8" />
-      <circle cx="120" cy="70" r="6" fill="#e8869c" />
-      <circle cx="85" cy="75" r="7" fill="#f8c4d2" />
-      <circle cx="140" cy="45" r="5" fill="#f3a5b8" />
-      <circle cx="60" cy="120" r="6" fill="#e8869c" />
-      <path
-        d="M150 30 Q130 50 110 40"
-        stroke="#4a3528"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-      />
-    </svg>
+      onError={(e) => {
+        e.currentTarget.style.display = 'none'
+      }}
+    />
   )
 }
 
+export function SakuraCorner({ position = 'tl' }) {
+  const { assets } = invitationConfig
+  const src = position === 'tr' ? assets.sakuraRight : assets.sakuraLeft
+  return <DecorationImage src={src} className={`scene-sakura scene-sakura--${position}`} />
+}
+
+export function CloudLayer({ variant = 'h' }) {
+  const { assets } = invitationConfig
+  const srcMap = {
+    h: assets.cloudHorizontal,
+    v: assets.cloudVertical,
+    h2: assets.cloudHorizontal,
+    v2: assets.cloudVertical,
+  }
+  const cloudSrc = srcMap[variant] || assets.cloudHorizontal
+  return <DecorationImage src={cloudSrc} className={`scene-cloud scene-cloud--${variant}`} />
+}
+
+export function PinkCloud() {
+  const { assets } = invitationConfig
+  return <DecorationImage src={assets.cloudPink} className="scene-cloud scene-cloud--pink" />
+}
+
 export function PetalsField() {
+  const { assets } = invitationConfig
+  const petal = assets.sakuraPetal
+  if (!petal) return null
   return (
     <div className="petals-field" aria-hidden>
       {[...Array(12)].map((_, i) => (
-        <span key={i} className="petals-field__petal" style={{ '--i': i }} />
+        <img
+          key={i}
+          className="petals-field__petal"
+          style={{ '--i': i }}
+          src={petal}
+          alt=""
+          onError={(e) => {
+            e.currentTarget.style.display = 'none'
+          }}
+        />
       ))}
     </div>
   )
@@ -47,10 +64,13 @@ export function PetalsField() {
 export function SectionScene({ children }) {
   return (
     <div className="section-scene">
-      <InkCorner position="tr" />
-      <InkCorner position="bl" />
+      <CloudLayer variant="h" />
+      <CloudLayer variant="h2" />
+      <CloudLayer variant="v" />
+      <CloudLayer variant="v2" />
+      <PinkCloud />
       <SakuraCorner position="tl" />
-      <SakuraCorner position="br" />
+      <SakuraCorner position="tr" />
       <PetalsField />
       {children}
     </div>
